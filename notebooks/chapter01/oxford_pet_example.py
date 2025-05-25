@@ -14,12 +14,18 @@
 # ---
 
 # %%
+import os
+from io import BytesIO
+
+import ipywidgets as widgets
 from fastai.vision.all import (
     ImageDataLoaders,
+    PILImage,
     Resize,
     URLs,
     error_rate,
     get_image_files,
+    load_learner,
     resnet34,
     untar_data,
     vision_learner,
@@ -38,7 +44,21 @@ dls = ImageDataLoaders.from_name_func(
 )
 
 # %%
-learn = vision_learner(dls, resnet34, metrics=error_rate)
-learn.fine_tune(1)
+model_fname = os.path.abspath("pet-model.pkl")
+load_from_disk = os.path.exists(model_fname)
+if load_from_disk:
+    learn = load_learner(model_fname)
+else:
+    learn = vision_learner(dls, resnet34, metrics=error_rate)
+    learn.fine_tune(1)
+    learn.export(model_fname)
 
 # %%
+uploader = widgets.FileUpload()
+uploader
+
+# %%
+img = PILImage.create(BytesIO(uploader.value[0]["content"]))
+is_cat, _, probs = learn.predict(img)
+print(f"Is this a cat?: {is_cat}.")
+print(f"Probability it's a cat: {probs[1].item():.6f}")

@@ -178,3 +178,6 @@ notes/.obsidian
 
 # CSV
 *.csv
+
+# annoying notebooks
+*.ipynb

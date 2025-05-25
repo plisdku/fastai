@@ -25,10 +25,10 @@ from duckduckgo_search import DDGS
 from fastai.data.block import CategoryBlock, DataBlock
 from fastai.data.transforms import RandomSplitter, parent_label
 from fastai.metrics import error_rate
+from fastai.vision.all import vision_learner
 from fastai.vision.augment import Resize
 from fastai.vision.core import PILImage
 from fastai.vision.data import ImageBlock
-from fastai.vision.learner import vision_learner
 from fastai.vision.utils import download_images, get_image_files, resize_images, verify_images
 from fastcore.all import L
 from fastdownload import download_url
@@ -41,11 +41,12 @@ from torchvision.models import resnet18
 # Train a classifier.
 
 # %%
-searches = "forest", "bird"
+searches = "train", "barn"
 max_results = 400
 
 root = Path("results")
 
+# %%
 for term in searches:
     result_dir = root / term
     os.makedirs(result_dir, exist_ok=True)
@@ -80,13 +81,10 @@ learn.fine_tune(3)
 # Get some images to test on
 
 ddgs = DDGS()
-test_url = L(ddgs.images("parrot", safesearch="off", max_results=1)).itemgot("image")
+test_url = L(ddgs.images("truck", safesearch="off", max_results=1)).itemgot("image")
 download_url(test_url[0], "test.jpg", show_progress=False)
 
-# %%
 test_img = Image.open("test.jpg").to_thumb(256, 256)
-
-# %%
 test_img
 
 # %%

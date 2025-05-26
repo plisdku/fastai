@@ -181,3 +181,17 @@ notes/.obsidian
 
 # annoying notebooks
 *.ipynb
+
+# images
+*.jpg
+*.JPG
+*.JPEG
+*.jpeg
+*.png
+*.webp
+*.jpg!d
+*.img
+*.aspx
+*.com
+*.jpg\:large
+*.php

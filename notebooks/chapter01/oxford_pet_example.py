@@ -40,7 +40,12 @@ def is_cat(x):
 
 
 dls = ImageDataLoaders.from_name_func(
-    path, get_image_files(path), valid_pct=0.2, seed=42, label_func=is_cat, item_tfms=Resize(224)
+    path,
+    get_image_files(path),
+    valid_pct=0.2,
+    seed=42,
+    label_func=is_cat,
+    item_tfms=Resize(224),
 )
 
 # %%

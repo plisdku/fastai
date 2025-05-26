@@ -195,3 +195,6 @@ notes/.obsidian
 *.com
 *.jpg\:large
 *.php
+
+# gherkins
+*.pkl

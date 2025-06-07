@@ -41,17 +41,6 @@ curve2 = hv.Points((xs, ys + 0.2 * torch.randn(xs.shape)), label="blee").opts(ma
 # plt.plot(xs, ys, 'o-')
 
 # %%
-
-# %%
-polyval([1, 0, 0], 4)
-
-# %%
-
-
-yyy = polyval(torch.tensor([1, 1]), xs)
-(hv.Curve((xs, yyy)) * hv.Scatter((xs, yyy)).opts(size=4)).opts(width=1000, height=700)
-
-# %%
 alpha = 0.1
 num_iters = 100
 
